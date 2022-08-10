@@ -16,11 +16,6 @@ public class Article extends Object {
 		this.body = body;
 	}
 
-	public Article(int id, String title, String body) {
-		this.id = id;
-		this.title = title;
-	}
-
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", title=" + title
