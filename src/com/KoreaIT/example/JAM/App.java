@@ -77,7 +77,7 @@ public class App {
 			sql.append(", `body` = ?", body);
 
 			int id = DBUtil.insert(conn, sql);
-			
+
 			System.out.printf("%d번 게시물이 생성되었습니다.\n", id);
 
 		} else if (cmd.startsWith("article delete ")) {
@@ -124,6 +124,33 @@ public class App {
 			DBUtil.update(conn, sql);
 
 			System.out.printf("%d번 게시물이 수정 되었습니다\n", id);
+
+		} else if (cmd.startsWith("article detail ")) {
+			int id = Integer.parseInt(cmd.split(" ")[2]);
+
+			System.out.printf("== %d번 게시물 상세보기 ==\n", id);
+
+			SecSql sql = new SecSql();
+			sql.append("SELECT *");
+			sql.append("FROM article");
+			sql.append("WHERE id = ?", id);
+
+			Map<String, Object> articleMap = DBUtil.selectRow(conn, sql);
+
+			if (articleMap.isEmpty()) {
+				System.out.printf("%d번 게시글은 존재하지 않습니다.\n", id);
+				return 0;
+			}
+
+			System.out.printf("== %d번 게시물 상세보기 ==\n", id);
+
+			Article article = new Article(articleMap);
+
+			System.out.printf("번호 : %d\n", article.id);
+			System.out.printf("작성날짜 : %s\n", article.regDate);
+			System.out.printf("수정날짜 : %s\n", article.updateDate);
+			System.out.printf("제목 : %s\n", article.title);
+			System.out.printf("내용 : %s\n", article.body);
 
 		} else if (cmd.equals("article list")) {
 
