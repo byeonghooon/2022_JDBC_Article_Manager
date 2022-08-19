@@ -15,7 +15,7 @@ public class ArticleService {
 
 	public int doWrite(int memberId, String title, String body) {
 
-		return articleDao.doWrite(memberId,title, body);
+		return articleDao.doWrite(memberId, title, body);
 	}
 
 	public boolean isArticleExists(int id) {
@@ -37,6 +37,10 @@ public class ArticleService {
 
 	public List<Article> getArticles() {
 		return articleDao.getArticles();
+	}
+
+	public void increaseHit(int id) {
+		articleDao.increaseHit(id);
 	}
 
 }
