@@ -26,10 +26,10 @@ public class ArticleController extends Controller {
 		String title = sc.nextLine();
 		System.out.printf("내용 : ");
 		String body = sc.nextLine();
-		
+
 		int memberId = Container.session.loginedMemberId;
 
-		int id = articleService.doWrite(memberId,title, body);
+		int id = articleService.doWrite(memberId, title, body);
 
 		System.out.printf("%d번 게시물이 생성되었습니다.\n", id);
 
@@ -116,10 +116,11 @@ public class ArticleController extends Controller {
 			return;
 		}
 
-		System.out.println("번호  /  제목");
+		System.out.printf("번호   /    %8s          /  제목   /  작성자\n", "작성날짜");
 
 		for (Article article : articles) {
-			System.out.printf("%d  /  %s\n", article.id, article.title);
+			System.out.printf("%4d  /  %s  /  %s  /  %s\n", article.id, article.regDate, article.title,
+					article.extra__writer);
 		}
 
 	}
